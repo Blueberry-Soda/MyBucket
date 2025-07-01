@@ -4,6 +4,8 @@ on:
     # run every 4 hours
     - cron: '30 2 * * *'
 name: Excavator
+permissions:
+  contents: write  # 仅授予对内容的写权限
 jobs:
   excavate:
     name: Excavate
