@@ -11,18 +11,12 @@
     },
     "installer": {
         "script": [
-            "Start-Process \"$dir\\calibre-portable-installer-$version.exe\" @(\"$env:TEMP\") -Wait",
-            "Move-Item \"$env:TEMP\\Calibre Portable\\**\" \"$dir\"",
-            "Remove-Item \"$env:TEMP\\Calibre Portable\"",
-            "Icacls $dir /t /c /reset"
+            "Start-Process -FilePath \"$dir\\$fname\" -ArgumentList @($env:TEMP) -Wait",
+            "Move-Item -Path \"$env:TEMP\\Calibre Portable\\*\" -Destination $dir -Force",
+            "Remove-Item -Path \"$dir\\$fname\", \"$env:TEMP\\Calibre Portable\" -Recurse -Force -ErrorAction SilentlyContinue",
+            "Icacls $dir /t /c /reset | Out-Null"
         ]
     },
-    "bin": [
-        [
-            "calibre-portable.exe",
-            "calibre"
-        ]
-    ],
     "shortcuts": [
         [
             "calibre-portable.exe",
